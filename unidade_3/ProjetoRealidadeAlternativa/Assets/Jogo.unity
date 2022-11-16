@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 40919617}
   - component: {fileID: 40919616}
   - component: {fileID: 40919615}
-  - component: {fileID: 40919619}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -232,20 +231,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &40919619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40919614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e57d4b1325c829419dafb5b926ca3be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mudarPalavra: {fileID: 303035581}
-  letrasNaoFazemParte: {fileID: 712669783}
 --- !u!1 &44720216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,8 +1824,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 40919619}
-        m_TargetAssemblyTypeName: Palavra, Assembly-CSharp
+      - m_Target: {fileID: 1230265176}
+        m_TargetAssemblyTypeName: QRCodeScanner, Assembly-CSharp
         m_MethodName: MudarTexto
         m_Mode: 1
         m_Arguments:

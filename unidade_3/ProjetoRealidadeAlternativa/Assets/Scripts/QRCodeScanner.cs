@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,12 @@ public class QRCodeScanner : MonoBehaviour
     [SerializeField] private RectTransform scanZone;
     [SerializeField] TextMeshProUGUI palavra;
     [SerializeField] TextMeshProUGUI letrasNaoContem;
+    private string palavraString;
+    private string levelDoJogo;
+    private  static int acertos;
+    private List<string> listaPalavrasNivel1 = new List<string> { "MAR", "VASO", "BOLA", "LUA", "RATO" };
+    private List<string> listaPalavrasNivel2 = new List<string> { "AMOR", "TOCA", "VOAR", "FLOR", "DADO" };
+    private List<string> listaPalavrasNivel3 = new List<string> { "CARRO", "FLAUTA", "PAPEL", "PLANTA", "VELAS" };
 
     private bool isCamAvaible;
     private WebCamTexture cameraTexture;
@@ -20,6 +27,10 @@ public class QRCodeScanner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (palavra.text == "")
+        {
+            MudarTexto();
+        }
         SetUpCamera();
     }
 
@@ -81,6 +92,7 @@ public class QRCodeScanner : MonoBehaviour
                 if (characters[i].ToString() == textOut.text)
                 {
                     palavraFinal += "<color=green>"+ characters[i].ToString() + "</color>";
+                    acertos++;
                 }
                 else{
                     palavraFinal += characters[i].ToString();
@@ -92,7 +104,21 @@ public class QRCodeScanner : MonoBehaviour
         {
             letrasNaoContem.text = letrasNaoContem.text + textOut.text + " ";
         }
+        if (acertos == palavraString.Length)
+        {
+            textOut.text = "MUITO BEM!";
+            MudarTexto();
+            acertos = 0;
+        }
+
         textOut.text = "";
+    }
+    IEnumerator Mensagem()
+    {
+        textOut.text = "MUITO BEM!";
+        yield return new WaitForSeconds(3);
+        MudarTexto();
+        acertos = 0;
     }
 
     private void Scan()
@@ -107,12 +133,38 @@ public class QRCodeScanner : MonoBehaviour
             }
             else
             {
-                textOut.text = "FAILED TO READ QR_CODE";
+                textOut.text = "NULL";
             }
         }
         catch
         {
             textOut.text = "FAILED IN TRY";
+        }
+    }
+
+    public void MudarTexto()
+    {
+        levelDoJogo = PlayerPrefs.GetString("Nivel");
+        if (levelDoJogo == "1")
+        {
+            int random = Random.Range(0, listaPalavrasNivel1.Count);
+            palavra.text = listaPalavrasNivel1[random];
+            palavraString = palavra.text;
+            letrasNaoContem.text = "";
+        }
+        if (levelDoJogo == "2")
+        {
+            int random = Random.Range(0, listaPalavrasNivel2.Count);
+            palavra.text = listaPalavrasNivel2[random];
+            palavraString = palavra.text;
+            letrasNaoContem.text = "";
+        }
+        if (levelDoJogo == "3")
+        {
+            int random = Random.Range(0, listaPalavrasNivel3.Count);
+            palavra.text = listaPalavrasNivel3[random];
+            palavraString = palavra.text;
+            letrasNaoContem.text = "";
         }
     }
 }

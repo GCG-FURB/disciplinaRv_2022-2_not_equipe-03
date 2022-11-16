@@ -80,8 +80,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3022}
     - Class: 114
       Script: {instanceID: 3606}
-    - Class: 114
-      Script: {instanceID: 4494}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128

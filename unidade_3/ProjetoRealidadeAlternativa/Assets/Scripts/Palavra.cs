@@ -16,7 +16,10 @@ public class Palavra : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-  
+        if(mudarPalavra.text == "")
+        {
+            MudarTexto();
+        }
     }
 
     // Update is called once per frame
